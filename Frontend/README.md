@@ -2,16 +2,14 @@
 
 ### Setup instruction
 
-1. Clone the project
+1. Open Project in Editor
 
-```
-    git clone https://github.com/singhsanket143/lms-frontend-hn.git
-```
+
 
 2. Move into the directory
 
 ```
-    cd lms-frontend-hn
+    cd Frontend
 ```
 
 3. install dependencies
