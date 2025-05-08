@@ -29,14 +29,14 @@ const router = Router();
 //   removeLectureFromCourse
 // );
 // router.get("/:id", isLoggedIn, getLecturesByCourseId);
-// router.post(
-//   "/:id",
-//   isLoggedIn,
-//   authorizeRoles("ADMIN"),
-//   upload.single("lecture"),
-//   addLectureToCourseById
-// );
-// router.delete("/:id", isLoggedIn, authorizeRoles("ADMIN"), deleteCourseById);
+router.post(
+  "/:id",
+  isLoggedIn,
+  authorizeRoles("ADMIN"),
+  upload.single("lecture"),
+  addLectureToCourseById
+);
+router.delete("/:id", isLoggedIn, authorizeRoles("ADMIN"), deleteCourseById);
 
 // Refactored code
 router

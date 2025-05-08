@@ -108,8 +108,9 @@ export const registerUser = asyncHandler(async (req, res, next) => {
  * @ACCESS Public
  */
 export const loginUser = asyncHandler(async (req, res, next) => {
+  
   // Destructuring the necessary data from req object
-  const { email, password } = req.body;
+  const {email,password} = req.body;
 
   // Check if the data is there or not, if not throw error message
   if (!email || !password) {
@@ -204,14 +205,14 @@ export const forgotPassword = asyncHandler(async (req, res, next) => {
   // Generating the reset token via the method we have in user model
   const resetToken = await user.generatePasswordResetToken();
 
-  // Saving the forgotPassword* to DB
+  // Saving the forgotPassword* to DB specliy newly generated token
   await user.save();
 
   // constructing a url to send the correct data
   /**HERE
    * req.protocol will send if http or https
    * req.get('host') will get the hostname
-   * the rest is the route that we will create to verify if token is correct or not
+   * the reset is the route that we will create to verify if token is correct or not
    */
   // const resetPasswordUrl = `${req.protocol}://${req.get(
   //   "host"
