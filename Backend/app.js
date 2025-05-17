@@ -13,9 +13,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // Third-Party
+
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  process.env.LOCAL_FRONTEND_URL
+];
+
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL, 'http://localhost:3000',],
+   origin: allowedOrigins,
     credentials: true,
   })
 );
