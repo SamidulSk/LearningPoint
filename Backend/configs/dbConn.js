@@ -16,7 +16,7 @@ const connectToDB = async () => {
     );
 
     if (connection) {
-      console.log(`Connected to MongoDB: ${connection.host}`);
+      console.log(`Connected to MongoDB: ${connection.host} ${connection.name}`);
     }
   } catch (error) {
     console.log(error);
