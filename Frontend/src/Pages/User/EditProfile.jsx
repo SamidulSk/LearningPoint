@@ -45,12 +45,12 @@ function EditProfile() {
     async function onFormSubmit(e) {
         e.preventDefault();
         console.log(data);
-        if(!data.fullName || !data.avatar) {
-            toast.error("All fields are mandatory");
+        if(!data.fullName) {
+            toast.error("Give your name");
             return;
         }
-        if(data.fullName.length < 5) {
-            toast.error("Name cannot be of less than 5 characters");
+        if(data.fullName.length < 3) {
+            toast.error("Name cannot be of less than 3 characters");
             return;
         }
         const formData = new FormData();

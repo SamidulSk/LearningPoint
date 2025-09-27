@@ -9,7 +9,7 @@ const userSchema = new Schema(
     fullName: {
       type: String,
       required: [true, 'Name is required'],
-      minlength: [5, 'Name must be at least 5 characters'],
+      minlength: [3, 'Name must be at least 3 characters'],
       lowercase: true,
       trim: true, // Removes unnecessary spaces
     },
@@ -26,7 +26,7 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: [true, 'Password is required'],
-      minlength: [8, 'Password must be at least 8 characters'],
+      minlength: [4, 'Password must be at least 4 characters'],
       select: false, // Will not select password upon looking up a document
     },
     subscription: {

@@ -34,6 +34,7 @@ export const buySubscription = asyncHandler(async (req, res, next) => {
   });
 
   // Adding the ID and the status to the user account
+  console.log("Subscription:", subscription.id);
   user.subscription.id = subscription.id;
   user.subscription.status = subscription.status;
 

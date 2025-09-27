@@ -25,10 +25,11 @@ export const getRazorPayId = createAsyncThunk("/razorpay/getId", async () => {
 export const purchaseCourseBundle = createAsyncThunk("/purchaseCourse", async () => {
     try {
         const response = await axiosInstance.post("/payments/subscribe");
-        console.log(response)
-        return response.data;
+        console.log("Subscription Response:", response.data);
+        return response.data.subscription_id; // <-- return subscription_id only
     } catch(error) {
         toast.error(error?.response?.data?.message);
+        throw error; // important to reject properly
     }
 });
 
@@ -83,28 +84,31 @@ const razorpaySlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-        .addCase(getRazorPayId.fulfilled, (state, action) =>{
-            state.key = action?.payload?.key;
+        .addCase(getRazorPayId.fulfilled, (state, action) => {
+            state.key = action?.payload?.key || "";
         })
         .addCase(purchaseCourseBundle.fulfilled, (state, action) => {
-            state.subscription_id = action?.payload?.subscription_id;
+            state.subscription_id = action?.payload || ""; // ensure subscription_id is set
+        })
+        .addCase(purchaseCourseBundle.rejected, (state, action) => {
+            state.subscription_id = "";
+            toast.error(action?.payload || "Failed to create subscription");
         })
         .addCase(verifyUserPayment.fulfilled, (state, action) => {
-            console.log(action);
-            toast.success(action?.payload?.message);
-            state.isPaymentVerified = action?.payload?.success;
+            toast.success(action?.payload?.message || "Payment verified");
+            state.isPaymentVerified = action?.payload?.success || false;
         })
         .addCase(verifyUserPayment.rejected, (state, action) => {
-            console.log(action);
-            toast.success(action?.payload?.message);
-            state.isPaymentVerified = action?.payload?.success;
+            toast.error(action?.payload?.message || "Payment verification failed");
+            state.isPaymentVerified = false;
         })
         .addCase(getPaymentRecord.fulfilled, (state, action) => {
-            state.allPayments = action?.payload?.allPayments;
-            state.finalMonths = action?.payload?.finalMonths;
-            state.monthlySalesRecord = action?.payload?.monthlySalesRecord;
-        })
+            state.allPayments = action?.payload?.allPayments || {};
+            state.finalMonths = action?.payload?.finalMonths || {};
+            state.monthlySalesRecord = action?.payload?.monthlySalesRecord || [];
+        });
     }
 });
 
 export default razorpaySlice.reducer;
+

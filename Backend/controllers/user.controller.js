@@ -26,7 +26,7 @@ export const registerUser = asyncHandler(async (req, res, next) => {
 
   // Check if the data is there or not, if not throw error message
   if (!fullName || !email || !password) {
-    return next(new AppError('All fields are required', 400));
+    return next(new AppError('All fields are required!!', 400));
   }
 
   // Check if the user exists with the provided email

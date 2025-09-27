@@ -51,14 +51,14 @@ function Signup() {
 
     async function createNewAccount(event) {
         event.preventDefault();
-        if(!signupData.email || !signupData.password || !signupData.fullName || !signupData.avatar) {
+        if(!signupData.email || !signupData.password || !signupData.fullName ) {
             toast.error("Please fill all the details");
             return;
         }
 
         // checking name field length
-        if(signupData.fullName.length < 5) {
-            toast.error("Name should be atleast of 5 characters")
+        if(signupData.fullName.length < 3) {
+            toast.error("Name should be atleast of 3 characters")
             return;
         }
         // checking valid email
@@ -68,7 +68,7 @@ function Signup() {
         }
         // checking password validation
         if(!isValidPassword(signupData.password)) {
-            toast.error("Password should be 6 - 16 character long with atleast a number and special character");
+         toast.error("Password should be 4 - 12 characters long");
             return;
         }
 
