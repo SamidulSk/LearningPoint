@@ -15,9 +15,7 @@ function ForgotPassword() {
     e.preventDefault();
     try {
       setLoading(true);
-
-      const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000/api/v1";
-
+      const BASE_URL = "https://learningpoint-backend.onrender.com/api/v1";
       const res = await axios.post(
         `${BASE_URL}/user/reset`,
         { email },
@@ -131,9 +129,8 @@ function ForgotPassword() {
                   transition={{ delay: 0.5 }}
                   whileHover={!loading ? { scale: 1.02, y: -2 } : {}}
                   whileTap={!loading ? { scale: 0.98 } : {}}
-                  className={`w-full relative group bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg transition-all duration-300 overflow-hidden ${
-                    loading ? 'opacity-75 cursor-not-allowed' : 'hover:shadow-xl hover:shadow-indigo-500/50'
-                  }`}
+                  className={`w-full relative group bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg transition-all duration-300 overflow-hidden ${loading ? 'opacity-75 cursor-not-allowed' : 'hover:shadow-xl hover:shadow-indigo-500/50'
+                    }`}
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     {loading ? (
